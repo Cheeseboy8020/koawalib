@@ -1,5 +1,7 @@
 package com.asiankoala.koawalib.math
 
+import jetbrains.datalore.base.typedGeometry.Vec
+
 /**
  * Represents robot's position and heading
  * @param[x] x position
@@ -28,5 +30,14 @@ data class Pose @JvmOverloads constructor(
      */
     override fun toString(): String {
         return String.format("%.2f, %.2f, %.2f°", x, y, heading.angleWrap.degrees)
+    }
+
+
+    fun relativeTo(other: Pose): Pose {
+        return Pose(this.vec.minus(other.vec).rotate(other.heading.unaryMinus()), this.heading.minus(other.heading))
+    }
+
+    fun transformBy(other: Pose): Pose{
+        return Pose(this.vec.plus(other.vec.rotate(this.heading)), this.heading.plus(other.heading))
     }
 }

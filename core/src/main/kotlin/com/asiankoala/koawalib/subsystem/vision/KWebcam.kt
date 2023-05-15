@@ -22,7 +22,7 @@ class KWebcam(
     private val height: Int,
     private val orientation: OpenCvCameraRotation
 ) : KDevice<WebcamName>(deviceName) {
-    private val camera: OpenCvCamera
+    val camera: OpenCvCamera
 
     /**
      * Start the camera stream
